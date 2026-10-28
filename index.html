@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TruthTrace - Digital Safety Platform</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="light-mode">
+
+    <!-- Welcome Modal -->
+    <div id="welcome-modal" class="modal-overlay hidden">
+        <div class="modal-card">
+            <div class="modal-header">
+                <span class="modal-badge" id="modal-badge-text">Begin Journey</span>
+                <h2 id="modal-title">Welcome to TruthTrace</h2>
+                <p id="modal-desc">Enter your name and pick your age group to begin learning.</p>
+            </div>
+
+            <form id="onboarding-form">
+                <div class="form-group">
+                    <label for="user-name-input" id="label-name">Your Name:</label>
+                    <input type="text" id="user-name-input"
+                           placeholder="e.g. Mariam" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="age-select" id="label-age">Age Group:</label>
+                    <select id="age-select" required>
+                        <option value="" disabled selected id="opt-choose-age">
+                            Choose Age Group
+                        </option>
+                        <option value="8-12">8 - 12 Years (Kids Academy)</option>
+                        <option value="13-17">13 - 17 Years (Teens Safety Room)</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn-primary pulse-btn"
+                        id="modal-start-btn">
+                    Start Training
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <header class="navbar">
+        <div class="logo">
+            <a href="#" class="nav-page-btn" data-page="home-page">
+                TruthTrace
+            </a>
+        </div>
+
+        <nav class="nav-links">
+            <a href="#" class="nav-page-btn active"
+               data-page="home-page" id="nav-home">Home</a>
+
+            <a href="#" class="nav-page-btn"
+               data-page="practice-page" id="nav-practice">Practice Room</a>
+
+            <a href="#" class="nav-page-btn"
+               data-page="lab-page" id="nav-lab">Investigation Lab</a>
+
+          
+<div class="nav-dropdown">
+    <button class="nav-dropdown-toggle"
+            type="button"
+            aria-expanded="false"
+            id="future-categories-toggle">
+        Age Group ▾
+    </button>
+
+    <div class="nav-dropdown-menu hidden" id="future-categories-menu">
+        <a href="#" data-age-group="8-12">
+            Kids <span>(8–12 years)</span>
+        </a>
+
+        <a href="#" data-age-group="13-17">
+            Teens <span>(13–17 years)</span>
+        </a>
+
+        <a href="#" data-coming-soon="Adults">
+            Adults <span>(Coming Soon)</span>
+        </a>
+    </div>
+</div>
+
+            <a href="#" class="nav-page-btn"
+               data-page="badges-page" id="nav-badges">Badges</a>
+
+            <a href="#" class="nav-page-btn"
+               data-page="about-page" id="nav-about">About Us</a>
+
+            <a href="#" class="nav-page-btn"
+               data-page="contact-page" id="nav-contact">Contact Us</a>
+        </nav>
+
+        <div class="navbar-right">
+            <span class="user-chip">
+                <strong id="user-display-name">Guest</strong>
+            </span>
+
+            <span class="stat-badge">
+                <span id="points-count">0</span>
+                <small id="lbl-pts">Pts</small>
+            </span>
+
+            <span class="stat-badge">
+                <span id="badge-count">0</span>
+                <small id="lbl-badges">Badges</small>
+            </span>
+
+            <button id="theme-toggle-btn" class="icon-btn"
+                    aria-label="Toggle Theme">
+                <svg id="theme-icon" viewBox="0 0 24 24"
+                     width="18" height="18" fill="none"
+                     stroke="currentColor" stroke-width="2"
+                     stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3
+                    7 7 0 0 0 21 12.79z"></path>
+                </svg>
+            </button>
+
+            <button id="lang-toggle-btn" class="pill-btn lang-btn">
+                AR
+            </button>
+
+            <button id="re-register-btn" class="pill-btn">
+             Logout
+            </button>
+        </div>
+    </header>
+
+    <main class="main-container">
+
+        <!-- Controls -->
+        <div class="arena-controls-bar">
+            <div class="control-group">
+                <label for="nav-age-select" id="lbl-age-group">
+                    Age Group:
+                </label>
+
+                <select id="nav-age-select" class="styled-select">
+                    <option value="8-12">8 - 12 Yrs (Kids)</option>
+                    <option value="13-17">13 - 17 Yrs (Teens)</option>
+                </select>
+            </div>
+
+            <div class="control-group">
+                <label for="nav-level-select" id="lbl-level-select">
+                    Level:
+                </label>
+
+                <select id="nav-level-select" class="styled-select">
+                    <option value="easy" id="opt-easy">Easy (Unlocked)</option>
+                    <option value="medium" id="opt-medium" disabled>
+                        Medium (Locked)
+                    </option>
+                    <option value="hard" id="opt-hard" disabled>
+                        Hard (Locked)
+                    </option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Home Page -->
+        <section id="home-page" class="page-section active-page">
+            <div class="hero-card">
+                <span class="hero-badge" id="current-age-theme-tag">
+                    Active Mode: Kids Academy
+                </span>
+
+                <h1 id="hero-title">
+                    Protect Yourself & Detect Online Traps
+                </h1>
+
+                <p id="hero-subtitle">
+                    Learn how to spot subtle online scams, game account
+                    thieves, and social engineering tricks through realistic
+                    social posts.
+                </p>
+
+                <button class="btn-hero-journey pulse-btn"
+                        id="start-journey-btn">
+                    Start the Journey
+                </button>
+            </div>
+
+            <div class="section-card">
+                <div class="section-title-wrap">
+                    <h2 id="demo-title">Quick Safety Examples</h2>
+                    <p id="demo-subtitle">
+                        Analyze these subtle posts before entering the practice room:
+                    </p>
+                </div>
+
+                <div class="demo-grid" id="demo-grid-container"></div>
+            </div>
+        </section>
+
+        <!-- Practice Room -->
+        <section id="practice-page" class="page-section hidden-page">
+            <div class="section-card">
+                <div class="section-header">
+                    <div class="status-tags">
+                        <span class="tag-pill" id="active-age-display">
+                            Age: 8-12
+                        </span>
+
+                        <span class="tag-pill highlight" id="active-level-display">
+                            Level: EASY
+                        </span>
+                    </div>
+
+                    <h1 id="practice-title">Practice Room</h1>
+                    <p id="practice-subtitle">
+                        Examine the post carefully. Look for subtle details,
+                        verification badges, or misleading text.
+                    </p>
+                </div>
+
+                <div class="quiz-card" id="quiz-card">
+                    <div class="post-card">
+                        <div class="post-header">
+                            <div class="author-avatar" id="post-avatar">U</div>
+
+                            <div class="author-details">
+                                <div class="author-title-row">
+                                    <span class="author-name" id="post-author-name">
+                                        Author Name
+                                    </span>
+
+                                    <span id="post-verified-badge"
+                                          class="verified-badge hidden"
+                                          title="Verified Account">✓</span>
+                                </div>
+
+                                <span class="author-handle" id="post-author-handle">
+                                    @username
+                                </span>
+                            </div>
+                        </div>
+
+                        <p class="post-body" id="scenario-text">
+                            Loading scenario...
+                        </p>
+                    </div>
+
+                    <div class="options-group" id="options-container">
+                        <button class="option-btn real-btn pulse-hover"
+                                data-answer="real" id="btn-real">
+                            Real & Safe
+                        </button>
+
+                        <button class="option-btn fake-btn pulse-hover"
+                                data-answer="fake" id="btn-fake">
+                            Fake / Scam
+                        </button>
+                    </div>
+
+                    <div id="feedback-box" class="feedback-box hidden">
+                        <h3 id="feedback-title">Result Analysis</h3>
+
+                        <p id="feedback-explanation">
+                            Explanation will appear here.
+                        </p>
+
+                        <button id="next-btn" class="btn-primary pulse-btn">
+                            Next Case
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Level Completion -->
+                <div id="level-completion-wrap" class="completion-box hidden">
+                    <div class="analysis-card">
+                        <h2 id="analysis-title">
+                            Behavioral & Thinking Pattern Analysis
+                        </h2>
+
+                        <p id="analysis-intro">
+                            Based on your choices in Level 1, here is how
+                            your critical thinking operates:
+                        </p>
+
+                        <div class="analysis-grid" id="analysis-grid"></div>
+                    </div>
+
+                    <!-- Certificate -->
+                    <div class="certificate-card" id="certificate-card">
+                        <div class="cert-border">
+                            <div class="cert-header">
+                                <span class="cert-badge">
+                                    TRUTHTRACE CERTIFIED
+                                </span>
+
+                                <h2>CERTIFICATE OF ACHIEVEMENT</h2>
+                                <p>This certificate is proudly awarded to</p>
+                            </div>
+
+                            <h1 id="cert-user-name" class="cert-name">
+                                Mariam
+                            </h1>
+
+                            <p id="cert-body-text" class="cert-desc">
+                                For successfully completing Level 1 Critical
+                                Evaluation & Scam Detection Training on
+                                TruthTrace Platform.
+                            </p>
+
+                            <div class="cert-footer">
+                                <div>
+                                    <strong>TruthTrace</strong>
+                                    <small>Digital Safety Academy</small>
+                                </div>
+
+                                <div>
+                                    <strong id="cert-date"></strong>
+                                    <small>Date of Completion</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button id="download-cert-btn" class="btn-primary">
+                            Print / Save Certificate
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        
+<!-- Investigation Lab -->
+<section id="lab-page" class="page-section hidden-page">
+    <div class="section-card">
+        <div class="section-header">
+            <span class="hero-badge">Learn to Check Facts</span>
+            <h1 id="lab-title">Fact Investigation</h1>
+            <p id="lab-subtitle">
+                Explore each case and learn how to check online information.
+            </p>
+        </div>
+
+        <div class="lab-grid">
+
+            <!-- Feature 1: Find the Evidence -->
+            <article class="lab-feature-card">
+                <span class="lab-feature-number">01</span>
+                <h2 id="evidence-title">Find the Evidence</h2>
+                <p id="evidence-desc">
+                    Check if a post gives real proof or just makes a claim.
+                </p>
+
+                <div id="evidence-content" class="lab-feature-content">
+                    <p class="lab-prompt">
+                        A post says that a new school rule has been announced.
+                        How can you check if it is true?
+                    </p>
+
+<div class="lab-options" id="evidence-options">
+
+    <button class="lab-option-btn" data-evidence="A" type="button">
+        A. The post has many likes.
+    </button>
+
+    <button class="lab-option-btn" data-evidence="B" type="button">
+        B. The school shared an official announcement.
+    </button>
+
+    <button class="lab-option-btn" data-evidence="C" type="button">
+        C. A friend shared the post.
+    </button>
+
+</div>
+
+<div id="evidence-feedback" class="lab-feedback hidden" role="status"></div>
+</div>
+</article>
+
+            <!-- Feature 2: Check the Photo -->
+            <article class="lab-feature-card">
+                <span class="lab-feature-number">02</span>
+                <h2 id="context-title">Check the Photo</h2>
+                <p id="context-desc">
+                    An old photo can be shared as if it happened today.
+                </p>
+
+                <div id="context-content" class="lab-feature-content">
+                    <p class="lab-prompt">
+                        An old photo is shared as a new event.
+                        What should you check first?
+                    </p>
+
+                    <div class="lab-options" id="context-options">
+                        <button class="lab-option-btn" data-context="A" type="button">
+                            How many people commented.
+                        </button>
+
+                        <button class="lab-option-btn" data-context="B" type="button">
+                            When and where the photo first appeared.
+                        </button>
+
+                        <button class="lab-option-btn" data-context="C" type="button">
+                            If the caption sounds scary.
+                        </button>
+                    </div>
+
+                    <div id="context-feedback" class="lab-feedback hidden" role="status"></div>
+                </div>
+            </article>
+
+            <!-- Feature 3: How Sure Are You? -->
+            <article class="lab-feature-card">
+                <span class="lab-feature-number">03</span>
+                <h2 id="confidence-title">How Sure Are You?</h2>
+                <p id="confidence-desc">
+                    Compare how sure you feel with your answers.
+                </p>
+
+                <div id="confidence-content" class="lab-feature-content">
+                    <p class="lab-prompt">
+                        How sure are you that you can spot false information?
+                    </p>
+
+                    <div class="confidence-slider-wrap">
+                        <label for="confidence-slider">
+                            Your confidence:
+                            <span id="confidence-value">50</span>%
+                        </label>
+
+                        <input type="range" id="confidence-slider"
+                            min="0" max="100" value="50">
+                    </div>
+
+                    <button id="save-confidence-btn" class="btn-primary" type="button">
+                        Save My Answer
+                    </button>
+
+                    <div id="confidence-feedback" class="lab-feedback hidden" role="status"></div>
+                </div>
+            </article>
+
+            <!-- Feature 4: My Progress Report -->
+            <article class="lab-feature-card">
+                <span class="lab-feature-number">04</span>
+                <h2 id="pattern-title">My Progress Report</h2>
+                <p id="pattern-desc">
+                    See what you did well and what you can improve.
+                </p>
+
+                <div id="pattern-content" class="lab-feature-content">
+                    <p class="lab-prompt">
+                        Get a report based on your practice answers.
+                    </p>
+
+                    <button id="generate-report-btn" class="btn-primary" type="button">
+                        Show My Report
+                    </button>
+
+                    <div id="thinking-report" class="lab-feedback hidden" role="status"></div>
+                </div>
+            </article>
+
+            <!-- Feature 5: New Evidence -->
+            <article class="lab-feature-card">
+                <span class="lab-feature-number">05</span>
+                <h2 id="evidence-stage-title">New Evidence</h2>
+                <p id="evidence-stage-desc">
+                    Read new clues and see how they change the story.
+                </p>
+
+                <div id="evidence-stage-content" class="lab-feature-content">
+                    <p class="lab-prompt" id="evidence-stage-text">
+                        Clue 1: A post shares news about a school event,
+                        but there is no source link.
+                    </p>
+
+                    <button id="reveal-evidence-btn" class="btn-primary" type="button">
+                        Show Next Clue
+                    </button>
+
+                    <div id="stage-feedback" class="lab-feedback hidden" role="status"></div>
+                </div>
+            </article>
+
+            <!-- Feature 6: Improve Your Skills -->
+            <article class="lab-feature-card">
+                <span class="lab-feature-number">06</span>
+                <h2 id="weakness-title">Improve Your Skills</h2>
+                <p id="weakness-desc">
+                    Get a practice idea based on your answers.
+                </p>
+
+                <div id="weakness-content" class="lab-feature-content">
+                    <p class="lab-prompt">
+                        Find out what you should practise next.
+                    </p>
+
+                    <button id="recommend-training-btn" class="btn-primary" type="button">
+                        Suggest My Next Practice
+                    </button>
+
+                    <div id="training-recommendation" class="lab-feedback hidden" role="status"></div>
+                </div>
+            </article>
+
+        </div>
+    </div>
+</section>
+
+
+        <!-- Badges Page -->
+        <section id="badges-page" class="page-section hidden-page">
+            <div class="section-card">
+                <h1 id="badges-title">Your Badges</h1>
+
+                <p id="badges-subtitle">
+                    Complete training levels to earn your badges.
+                </p>
+
+                <div class="badges-grid">
+                    <div class="badge-card" id="badge-card-0">
+                        <div class="badge-icon-text">LEVEL 1</div>
+                        <h3 id="badge-1-name">Junior Shield</h3>
+                        <p id="badge-1-desc">
+                            Complete Level 1 to unlock this badge.
+                        </p>
+                    </div>
+
+                    <div class="badge-card" id="badge-card-1">
+                        <div class="badge-icon-text">LEVEL 2</div>
+                        <h3 id="badge-2-name">Fact Checker</h3>
+                        <p id="badge-2-desc">
+                            Complete Level 2 to unlock this badge.
+                        </p>
+                    </div>
+
+                    <div class="badge-card" id="badge-card-2">
+                        <div class="badge-icon-text">LEVEL 3</div>
+                        <h3 id="badge-3-name">Truth Master</h3>
+                        <p id="badge-3-desc">
+                            Complete Level 3 to unlock this badge.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Page -->
+        <section id="about-page" class="page-section hidden-page">
+            <div class="section-card">
+                <h1 id="about-title">About TruthTrace</h1>
+
+                <p id="about-desc">
+                    TruthTrace is an interactive educational platform that
+                    helps children and teenagers develop digital safety
+                    and critical thinking skills. Through realistic online
+                    scenarios, users learn to question claims, examine
+                    evidence, and recognize misleading information.
+                </p>
+            </div>
+        </section>
+
+        <!-- Contact Page -->
+        <section id="contact-page" class="page-section hidden-page">
+            <div class="section-card">
+                <h1 id="contact-title">Contact Us</h1>
+
+                <p id="contact-desc">
+                    Have questions or suggestions? Send us a message.
+                </p>
+
+                <form id="contact-form" class="simple-form">
+                    <div class="form-row">
+                        <input type="text" id="contact-name"
+                               placeholder="Your Name" required>
+
+                        <input type="email" id="contact-email"
+                               placeholder="Your Email" required>
+                    </div>
+
+                    <textarea id="contact-message"
+                              placeholder="Your Message"
+                              rows="5" required></textarea>
+
+                    <button type="submit"
+                            class="btn-primary pulse-btn"
+                            id="contact-send-btn">
+                        Send Message
+                    </button>
+                </form>
+            </div>
+        </section>
+        
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <p>© 2026 TruthTrace. Learn to question. Learn to verify.</p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
